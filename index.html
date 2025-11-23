@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrackHive - Modern Developer Hub</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* --- MODERN & PROFESSIONAL UI STYLING --- */
+        :root {
+            --background-dark: #1a202c;
+            --background-light: #2d3748;
+            --primary-accent: #4299e1;
+            --text-primary: #edf2f7;
+            --text-secondary: #a0aec0;
+            --border-color: #4a5568;
+            --success-color: #48bb78;
+            --warning-color: #f6ad55;
+            --danger-color: #f56565;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--background-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            /* Subtle SVG Background Pattern */
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232d3748' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        header {
+            background-color: rgba(26, 32, 44, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+        header h1 { font-size: 1.8rem; font-weight: 700; color: var(--text-primary); }
+        .home-btn {
+            background: var(--primary-accent); color: white; text-decoration: none;
+            padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .home-btn:hover { background-color: #2b6cb0; transform: translateY(-2px); }
+
+        .hero {
+            padding: 5rem 2rem;
+            text-align: center;
+            background-image: linear-gradient(rgba(26, 32, 44, 0.85), rgba(26, 32, 44, 0.85)), url('https://images.unsplash.com/photo-1550439062-609e1531270e?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .hero h2 { font-size: 2.5rem; color: white; margin-bottom: 0.5rem; }
+        .hero p { font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+
+        .container { max-width: 900px; margin: 2rem auto; padding: 0 20px; }
+        
+        .form-section {
+            background: var(--background-light); padding: 2rem; border-radius: 12px;
+            box-shadow: var(--shadow); margin-bottom: 3rem; border: 1px solid var(--border-color);
+        }
+        .form-section h3 { text-align: center; font-size: 1.5rem; margin-bottom: 2rem; }
+        
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px;
+            font-family: var(--font-family); background-color: var(--background-dark); margin-bottom: 1rem;
+            color: var(--text-primary); transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-secondary); }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none; border-color: var(--primary-accent);
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+        }
+
+        .submit-btn {
+            width: 100%; padding: 12px; background: var(--primary-accent);
+            color: white; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        .submit-btn:hover { background-color: #2b6cb0; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
+        
+        .discussion-controls {
+            display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between;
+            align-items: center; margin-bottom: 2rem; background: var(--background-light);
+            padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color);
+        }
+        .search-bar input, .sort-bar select {
+            background: var(--background-dark); border: 1px solid var(--border-color);
+            color: var(--text-primary); padding: 10px; border-radius: 8px; width: 100%;
+        }
+        .search-bar, .sort-bar { flex-grow: 1; min-width: 200px; }
+        .clear-all-btn { background: var(--danger-color); color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+
+        .problem-card {
+            background: var(--background-light); border-radius: 12px; margin-bottom: 1.5rem;
+            box-shadow: var(--shadow); transition: all 0.3s ease;
+            border-top: 4px solid var(--warning-color); animation: fadeInUp 0.5s ease-out forwards;
+        }
+        .problem-card.status-solved { border-top-color: var(--success-color); }
+        .problem-card.status-in-progress { border-top-color: var(--primary-accent); }
+        .problem-content { padding: 1.5rem; }
+        
+        .problem-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; }
+        .problem-card h3 { flex-grow: 1; font-size: 1.3rem; }
+        .problem-actions, .comment-actions { display: flex; gap: 15px; }
+        .action-btn { background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.1rem; transition: color 0.3s; }
+        .action-btn.edit-btn:hover { color: var(--primary-accent); }
+        .action-btn.delete-btn:hover { color: var(--danger-color); }
+        
+        pre { background: #000; color: #f1f1f1; padding: 1rem; border-radius: 8px; margin: 1rem 0; overflow-x: auto; }
+
+        /* --- MODIFIED COMMENTS SECTION --- */
+        .comments-section { background-color: var(--background-dark); padding: 1.5rem; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
+        .comment-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-radius: 6px; margin-bottom: 8px; background-color: var(--background-light); }
+        
+        .comment-form { display: flex; flex-direction: column; gap: 0.5rem; }
+        .comment-input-wrapper { display: flex; align-items: flex-start; gap: 0.75rem; }
+        .comment-avatar { font-size: 2.25rem; color: var(--text-secondary); margin-top: 5px; }
+        .comment-form textarea {
+            flex-grow: 1; background-color: var(--background-light);
+            border: 1px solid var(--border-color); color: var(--text-primary);
+            border-radius: 8px; padding: 10px; resize: none; overflow-y: hidden;
+            min-height: 45px; font-family: var(--font-family);
+        }
+        .comment-form-actions { display: flex; justify-content: flex-end; }
+        .comment-form button {
+            background-color: var(--primary-accent); color: white; border: none; padding: 8px 15px;
+            border-radius: 6px; cursor: pointer; font-weight: 600; transition: background-color 0.3s;
+        }
+        .comment-form button:disabled { background-color: #374151; cursor: not-allowed; }
+        
+        /* Modal and other styles */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: none; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(5px); }
+        .modal-box { background: var(--background-light); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-color); width: 90%; max-width: 500px; animation: modal-pop 0.3s ease; }
+        .modal-actions { display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1rem; }
+        .modal-btn { padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; border: 1px solid transparent; }
+        .modal-btn-confirm { background-color: var(--danger-color); color: #fff; }
+        .modal-btn-save { background-color: var(--success-color); color: #fff; }
+        .modal-btn-cancel { background-color: #4a5568; color: var(--text-primary); }
+        .status-badge { background: var(--warning-color); color: #000; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; cursor: pointer; display: inline-block; }
+        .status-badge.status-solved { background: var(--success-color); }
+        .status-badge.status-in-progress { background: var(--primary-accent); color: white; }
+        .tag { background-color: var(--background-dark); color: var(--text-secondary); padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: 600; margin-top: 1rem; display: inline-block; }
+
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes modal-pop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        @media (max-width: 768px) {
+            header { padding: 1rem; }
+            header h1 { font-size: 1.5rem; }
+            .hero { padding: 3rem 1rem; }
+            .hero h2 { font-size: 2rem; }
+            .discussion-controls { flex-direction: column; align-items: stretch; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><i class="fa-solid fa-hive"></i> TrackHive</h1>
+        <a href="#" id="home-btn" class="home-btn"><i class="fa-solid fa-house"></i> Home</a>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2>Collaborate, Solve, Evolve.</h2>
+            <p>The central hub for developers to track issues, discuss solutions, and build better code together.</p>
+        </section>
+
+        <div class="container">
+            <section class="form-section">
+                <h3><i class="fa-solid fa-plus-circle"></i> Submit a New Problem</h3>
+                <form id="new-problem-form">
+                    <div class="form-group"><input type="text" id="problem-title" placeholder="Problem Title" required></div>
+                    <div class="form-group"><textarea id="problem-description" placeholder="Description (use ``` for code blocks)" required rows="5"></textarea></div>
+                    <div class="form-group"><input type="text" id="problem-language" placeholder="Language / Technology" required></div>
+                    <button type="submit" class="submit-btn">Post to the Hive</button>
+                </form>
+            </section>
+
+            <section id="problem-list">
+                <div class="discussion-controls">
+                    <div class="search-bar"><input type="search" id="search-input" placeholder="Search problems..."></div>
+                    <div class="sort-bar">
+                        <select id="sort-select">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                        </select>
+                    </div>
+                    <button id="clear-all-btn" class="clear-all-btn" title="Delete All Problems"><i class="fa-solid fa-trash"></i></button>
+                </div>
+                <div id="problems-container"></div>
+            </section>
+        </div>
+    </main>
+    
+    <div id="confirmation-modal" class="modal-overlay"><div class="modal-box" style="text-align:center;"><p id="modal-message">Are you sure?</p><div class="modal-actions" style="justify-content:center;"><button id="modal-confirm-btn" class="modal-btn modal-btn-confirm">Confirm</button><button class="modal-btn modal-btn-cancel">Cancel</button></div></div></div>
+    <div id="edit-problem-modal" class="modal-overlay"><div class="modal-box"><h3><i class="fa-solid fa-pencil"></i> Edit Problem</h3><form id="edit-problem-form"><div class="form-group"><input type="text" id="edit-problem-title" required></div><div class="form-group"><textarea id="edit-problem-description" rows="5" required></textarea></div><div class="form-group"><input type="text" id="edit-problem-language" required></div><div class="modal-actions"><button type="button" class="modal-btn modal-btn-cancel">Cancel</button><button type="submit" class="modal-btn modal-btn-save">Save Changes</button></div></form></div></div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- DOM ELEMENTS & STATE ---
+        const homeBtn = document.getElementById('home-btn'), problemForm = document.getElementById('new-problem-form'),
+              problemsContainer = document.getElementById('problems-container'), searchInput = document.getElementById('search-input'),
+              sortSelect = document.getElementById('sort-select'), clearAllBtn = document.getElementById('clear-all-btn'),
+              confirmModal = document.getElementById('confirmation-modal'), editModal = document.getElementById('edit-problem-modal'),
+              editProblemForm = document.getElementById('edit-problem-form');
+        let problems = JSON.parse(localStorage.getItem('trackhive_problems')) || [], confirmCallback = null, editingProblemId = null;
+
+        // --- UTILITIES & DATA ---
+        const saveProblems = () => localStorage.setItem('trackhive_problems', JSON.stringify(problems));
+        const escapeHtml = (unsafe) => unsafe.replace(/[&<"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[m]);
+        const formatCodeSnippets = (text) => text.replace(/```([\s\S]*?)```/g, (match, code) => `<pre><code>${escapeHtml(code.trim())}</code></pre>`);
+        
+        // --- MODAL CONTROLS ---
+        const showConfirmModal = (message, callback) => { confirmModal.querySelector('#modal-message').textContent = message; confirmCallback = callback; confirmModal.style.display = 'flex'; };
+        const hideConfirmModal = () => confirmModal.style.display = 'none';
+        const showEditModal = (problemId) => {
+            editingProblemId = problemId; const problem = problems.find(p => p.id === problemId);
+            editModal.querySelector('#edit-problem-title').value = problem.title;
+            editModal.querySelector('#edit-problem-description').value = problem.description;
+            editModal.querySelector('#edit-problem-language').value = problem.language;
+            editModal.style.display = 'flex';
+        };
+        const hideEditModal = () => editModal.style.display = 'none';
+
+        // --- CORE RENDER FUNCTION ---
+        const renderProblems = () => {
+            const searchTerm = searchInput.value.toLowerCase(), sortBy = sortSelect.value;
+            let filteredProblems = problems.filter(p => p.title.toLowerCase().includes(searchTerm) || p.description.toLowerCase().includes(searchTerm) || p.language.toLowerCase().includes(searchTerm));
+            filteredProblems.sort((a, b) => sortBy === 'newest' ? b.id - a.id : a.id - b.id);
+            problemsContainer.innerHTML = '';
+            if (filteredProblems.length === 0) {
+                problemsContainer.innerHTML = `<div style="text-align:center; padding: 2rem; background: var(--background-light); border-radius:12px;"><p>🐝 No problems found. Be the first to post!</p></div>`; return;
+            }
+            filteredProblems.forEach(problem => {
+                const card = document.createElement('div');
+                card.className = `problem-card status-${problem.status}`; card.dataset.id = problem.id;
+                const commentsHtml = problem.comments.map(c => `
+                    <div class="comment-item" data-comment-id="${c.id}">
+                        <span class="comment-text">${escapeHtml(c.text)}</span>
+                        <div class="comment-actions">
+                            <button class="action-btn edit-comment-btn" title="Edit Comment"><i class="fa-solid fa-pencil"></i></button>
+                            <button class="action-btn delete-comment-btn" title="Delete Comment"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
+                    </div>`).join('');
+                card.innerHTML = `
+                    <div class="problem-content">
+                        <div class="problem-card-header">
+                            <h3>${escapeHtml(problem.title)}</h3>
+                            <div class="problem-actions">
+                                <button class="action-btn edit-btn" title="Edit Problem"><i class="fa-solid fa-pencil"></i></button>
+                                <button class="action-btn delete-btn" title="Delete Problem"><i class="fa-solid fa-times-circle"></i></button>
+                            </div>
+                        </div>
+                        <div style="padding: 0 1.5rem 1.5rem 1.5rem;">
+                          <div class="status-badge status-${problem.status}" title="Click to change status"><span>${problem.status}</span></div>
+                          <div>${formatCodeSnippets(escapeHtml(problem.description))}</div>
+                          <div class="tag"><i class="fa-solid fa-tag"></i> ${escapeHtml(problem.language)}</div>
+                        </div>
+                    </div>
+                    <div class="comments-section">
+                        <h4><i class="fa-solid fa-comments"></i> Comments (${problem.comments.length})</h4>
+                        <form class="comment-form" style="margin-top:1rem;">
+                            <div class="comment-input-wrapper">
+                                <i class="fa-solid fa-circle-user comment-avatar"></i>
+                                <textarea placeholder="Add a comment..." required rows="1"></textarea>
+                            </div>
+                            <div class="comment-form-actions">
+                                <button type="submit" disabled>Post</button>
+                            </div>
+                        </form>
+                        <div class="comments-list" style="margin-top:1rem;">${commentsHtml}</div>
+                    </div>`;
+                problemsContainer.appendChild(card);
+            });
+        };
+
+        // --- EVENT LISTENERS ---
+        homeBtn.addEventListener('click', e => { e.preventDefault(); window.location.reload(); });
+        problemForm.addEventListener('submit', e => { e.preventDefault(); problems.unshift({ id: Date.now(), title: problemForm.querySelector('#problem-title').value.trim(), description: problemForm.querySelector('#problem-description').value.trim(), language: problemForm.querySelector('#problem-language').value.trim(), comments: [], status: 'Open' }); saveProblems(); renderProblems(); problemForm.reset(); });
+        editProblemForm.addEventListener('submit', e => { e.preventDefault(); const problem = problems.find(p => p.id === editingProblemId); if(problem){ problem.title = editModal.querySelector('#edit-problem-title').value.trim(); problem.description = editModal.querySelector('#edit-problem-description').value.trim(); problem.language = editModal.querySelector('#edit-problem-language').value.trim(); saveProblems(); renderProblems(); hideEditModal(); } });
+        searchInput.addEventListener('input', renderProblems);
+        sortSelect.addEventListener('change', renderProblems);
+        clearAllBtn.addEventListener('click', () => { if (problems.length > 0) showConfirmModal('Delete ALL problems permanently?', () => { problems = []; saveProblems(); renderProblems(); hideConfirmModal(); }); });
+
+        problemsContainer.addEventListener('click', e => {
+            const problemCard = e.target.closest('.problem-card'); if (!problemCard) return;
+            const problemId = Number(problemCard.dataset.id), problem = problems.find(p => p.id === problemId);
+            if (e.target.closest('.delete-btn')) showConfirmModal('Delete this problem?', () => { problems = problems.filter(p => p.id !== problemId); saveProblems(); renderProblems(); hideConfirmModal(); });
+            if (e.target.closest('.edit-btn')) showEditModal(problemId);
+            if (e.target.closest('.status-badge')) { const s = ['Open', 'In Progress', 'Solved']; problem.status = s[(s.indexOf(problem.status) + 1) % s.length]; saveProblems(); renderProblems(); }
+            const commentItem = e.target.closest('.comment-item');
+            if (commentItem) {
+                const commentId = Number(commentItem.dataset.commentId), comment = problem.comments.find(c => c.id === commentId);
+                if (e.target.closest('.delete-comment-btn')) showConfirmModal('Delete this comment?', () => { problem.comments = problem.comments.filter(c => c.id !== commentId); saveProblems(); renderProblems(); hideConfirmModal(); });
+                if (e.target.closest('.edit-comment-btn')) { const newText = prompt('Edit comment:', comment.text); if (newText && newText.trim()) { comment.text = newText.trim(); saveProblems(); renderProblems(); } }
+            }
+        });
+        
+        problemsContainer.addEventListener('submit', e => {
+            if (e.target.classList.contains('comment-form')) {
+                e.preventDefault();
+                const textarea = e.target.querySelector('textarea'), problem = problems.find(p => p.id === Number(e.target.closest('.problem-card').dataset.id));
+                if (textarea.value.trim()) { problem.comments.push({ id: Date.now(), text: textarea.value.trim() }); saveProblems(); renderProblems(); }
+            }
+        });
+        
+        // Listener for auto-growing textarea and enabling/disabling post button
+        problemsContainer.addEventListener('input', e => {
+            if (e.target.tagName.toLowerCase() === 'textarea' && e.target.closest('.comment-form')) {
+                const textarea = e.target;
+                const button = textarea.closest('.comment-form').querySelector('button[type="submit"]');
+                textarea.style.height = 'auto';
+                textarea.style.height = `${textarea.scrollHeight}px`;
+                button.disabled = textarea.value.trim() === '';
+            }
+        });
+
+        confirmModal.addEventListener('click', e => { if (e.target.matches('.modal-btn-confirm') && confirmCallback) confirmCallback(); if (e.target.matches('.modal-btn-cancel')) hideConfirmModal(); });
+        editModal.addEventListener('click', e => { if (e.target.matches('.modal-btn-cancel')) hideEditModal(); });
+
+        renderProblems(); // Initial Render
+    });
+    </script>
+</body>
+</html>
